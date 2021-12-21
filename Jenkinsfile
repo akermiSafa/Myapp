@@ -2,6 +2,13 @@ pipeline
 {
 agent any 
  stages{
+  stage('Build'){
+   steps{
+    scripts{
+     sh "ansible-playbook ansible/build.yml -i ansible/inventory/host.yml"
+    }
+   }
+  }
 stage('Pull'){
 steps{
 script{
