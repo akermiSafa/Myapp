@@ -1,7 +1,7 @@
 pipeline
 {
 agent any {
-  ^
+ 
 stage('Pull'){
 steps{
 script{
