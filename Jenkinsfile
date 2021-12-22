@@ -2,13 +2,7 @@ pipeline
 {
 agent any 
  stages{
-  stage('Build'){
-   steps{
-    scripts{
-     sh "ansible-playbook ansible/build.yml -i ansible/inventory/host.yml"
-    }
-   }
-  }
+  
 stage('Pull'){
 steps{
 script{
@@ -19,5 +13,28 @@ url: 'https://github.com/akermiSafa/myapp.git']]])
 }
 }
 }
+stage('install') {
+steps {
+script{
+sh " npm install --save-dev @angular-devkit/build-angular"
+}
+}
+}
+
+stage('Build'){
+   steps{
+    scripts{
+     sh "ansible-playbook ansible/build.yml -i ansible/inventory/host.yml"
+    }
+   }
+  }
+  stage('docker') {
+  steps{
+  script{
+  sh " ansible-playbook ansible/docker.yml -i ansible/inventory/host.yml " 
+  }
+  }
+  }
+  
 }
 }
